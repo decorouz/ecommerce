@@ -52,7 +52,7 @@ class TestViewResponse(TestCase):
         response = all_products(request)
         html = response.content.decode("utf8")
 
-        self.assertIn("<title>Home</title>", html)
+        self.assertIn("<title>BookStore</title>", html)
         self.assertTrue(html.startswith("\n<!DOCTYPE html>"))
         self.assertEqual(response.status_code, 200)
 
@@ -61,6 +61,15 @@ class TestViewResponse(TestCase):
         request = self.factory.get("/product/zero-to-hero")
         response = all_products(request)
         html = response.content.decode("utf8")
-        self.assertIn("<title>Home</title>", html)
+        self.assertIn("<title>BookStore</title>", html)
         self.assertTrue(html.startswith("\n<!DOCTYPE html>"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_allowed_host(self):
+        """
+        Test allowed host in the core settings
+        """
+        response = self.c.get("/", HTTP_HOST="noaddress.com")
+        self.assertEqual(response.status_code, 400)
+        response = self.c.get("/", HTTP_HOST="yourdomain.com")
         self.assertEqual(response.status_code, 200)
