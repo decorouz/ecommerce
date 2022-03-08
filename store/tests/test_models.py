@@ -1,7 +1,7 @@
-from unicodedata import category
-from django.test import TestCase
-from store.models import Product, Author, Category
 from django.contrib.auth.models import User
+from django.test import TestCase
+
+from store.models import Author, Category, Product
 
 
 class TestAuthorsModel(TestCase):
@@ -14,7 +14,7 @@ class TestAuthorsModel(TestCase):
         """
         data = self.data1
         self.assertTrue(isinstance(data, Author))
-        self.assertEqual(str(data), "james, peter")
+        self.assertEqual(str(data), "james peter")
 
 
 class TestCategoriesModel(TestCase):
