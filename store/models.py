@@ -1,5 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 class Category(models.Model):
@@ -11,6 +13,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("store:category_list", args=[self.slug])
 
 
 class Author(models.Model):
@@ -24,7 +29,10 @@ class Author(models.Model):
         ordering = ["first_name", "last_name"]
 
     def __str__(self):
-        return f"{self.first_name}, {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
+
+    def get_absolute_url(self):
+        return reverse("store:author_detail", args=[self.slug])
 
 
 class Product(models.Model):
@@ -46,3 +54,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("store:product_detail", args=[self.slug])
