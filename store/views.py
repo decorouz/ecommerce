@@ -6,7 +6,7 @@ from .models import Author, Category, Product
 
 
 def all_products(request):
-    products = Product.objects.all()
+    products = Product.products.all()
 
     context = {"products": products}
     return render(request, "store/home.html", context)
@@ -18,9 +18,9 @@ def product_detail(request, slug):
     return render(request, "store/products/detail.html", {"product": product})
 
 
-def category_list(request, category_slug):
+def category_list(request, category_slug=None):
     category = None
-    products = Product.objects.filter(in_stock=True)
+    products = Product.products.filter(in_stock=True)
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
