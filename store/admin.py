@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Author, Category, Product
 
 # Register your models here.
@@ -6,7 +7,7 @@ from .models import Author, Category, Product
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "date_of_birth", "date_of_death")
+    list_display = ("last_name", "first_name", "date_of_birth", "date_of_death", "slug")
     prepopulated_fields = {"slug": ("last_name", "first_name")}
 
 
