@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% if basket.name %}{{basket.name}}{% else %}Basket Summary{% endif %}
+{% endblock %}
+
+{% block content %}
+Basket Summary
+{% endblock %}
