@@ -26,11 +26,6 @@ class TestViewResponse(TestCase):
             category_id=1,
         )
 
-    def test_url_allowed_host(self):
-        """Test Allowed host"""
-        response = self.c.get("/")
-        self.assertEqual(response.status_code, 200)
-
     def test_product_detail_url(self):
         """Test Product response status"""
 
