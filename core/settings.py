@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-*v%-i&03s(7&)7d7j10#gnyn%9^k7c$%p_$h880u790si-y=tk"
+SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,7 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "store",
     "basket",
+    "account",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -126,6 +130,20 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_MEDIA = "images/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
+
+# Custom user model
+AUTH_USER_MODEL = "account.UserBase"
+LOGIN_REDIRECT_URL = "/account/dashboard"
+LOGIN_URL = "/account/login/"
+
+
+# MailGun SMTP backend
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
