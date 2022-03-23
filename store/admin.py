@@ -1,26 +1,46 @@
 from django.contrib import admin
+from mptt.admin import MPTTModelAdmin
 
-from .models import Author, Category, Product
+from .models import (
+    Category,
+    Product,
+    ProductImage,
+    ProductSpecification,
+    ProductSpecificationValue,
+    ProductType,
+)
 
-# Register your models here.
+# admin.site.register(MPTTModelAdmin)
 
 
-@admin.register(Author)
-class AuthorAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "date_of_birth", "date_of_death", "slug")
-    prepopulated_fields = {"slug": ("last_name", "first_name")}
+admin.site.register(Category, MPTTModelAdmin)
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug")
-    prepopulated_fields = {"slug": ("name",)}
+class ProductSpecificationInline(admin.TabularInline):
+    model = ProductSpecification
+
+
+@admin.register(ProductType)
+class ProductTypeAdmin(admin.ModelAdmin):
+    inlines = [
+        ProductSpecificationInline,
+    ]
+
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+
+
+class ProductSpecificationValueInline(admin.TabularInline):
+    model = ProductSpecificationValue
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title", "author", "slug", "price", "in_stock", "created", "updated"]
+    inlines = [
+        ProductSpecificationValueInline,
+        ProductImageInline,
+    ]
 
-    list_filter = ["in_stock", "is_active"]
-    list_editable = ["in_stock", "price"]
-    prepopulated_fields = {"slug": ("title", "author")}
+    def get_prepopulated_fields(self, request, obj):
+        return {"slug": ("title",)}

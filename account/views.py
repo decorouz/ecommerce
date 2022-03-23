@@ -12,6 +12,7 @@ from .tokens import account_activation_token
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import UserBase
+from orders.views import user_orders
 
 
 # Create your views here.
@@ -19,7 +20,10 @@ from .models import UserBase
 
 @login_required
 def dashboard(request):
-    return render(request, "account/user/dashboard.html")
+    orders = user_orders(request)
+    return render(
+        request, "account/user/dashboard.html", {"orders": orders}
+    )
 
 
 @login_required
@@ -58,7 +62,6 @@ def account_register(request):
     if request.method == "POST":
         registerForm = UserRegistrationForm(request.POST)
 
-        print(registerForm)
         if registerForm.is_valid():
             email = request.POST.get("email")
             user = registerForm.save(commit=False)

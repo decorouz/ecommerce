@@ -1,7 +1,10 @@
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from django_countries.fields import CountryField
 
 # Create your models here.
 
@@ -42,7 +45,6 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     about = models.TextField(_("about"), max_length=500, blank=True)
-    country = CountryField(blank_label='(select country)', blank=True)
     phone_number = models.CharField(max_length=150, blank=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
