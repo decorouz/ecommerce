@@ -1,8 +1,11 @@
+import uuid
+
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin,
 )
+from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -10,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomAccountManager(BaseUserManager):
-    def create_superuser(self, email, user_name, password, **other_fields):
+    def create_superuser(self, email, name, password, **other_fields):
         """
         Creates and saves a superuser with the given email, username, password and other fields
         """
@@ -24,28 +27,28 @@ class CustomAccountManager(BaseUserManager):
         if other_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must be assigned to is_superuser=True")
 
-        user = self.create_user(email, user_name, password, **other_fields)
+        user = self.create_user(email, name, password, **other_fields)
         return user
 
-    def create_user(self, email, user_name, password, **other_fields):
+    def create_user(self, email, name, password, **other_fields):
         """
         Creates and saves a User with the given email, username, password and other fields required
         """
         if not email:
             raise ValueError(_("User must have an email address"))
 
-        user = self.model(email=self.normalize_email(email), user_name=user_name, **other_fields)
+        user = self.model(email=self.normalize_email(email), name=name, **other_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
 
-class UserBase(AbstractBaseUser, PermissionsMixin):
+class Customer(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
-    first_name = models.CharField(max_length=150, blank=True)
-    about = models.TextField(_("about"), max_length=500, blank=True)
-    phone_number = models.CharField(max_length=150, blank=True)
+    name = models.CharField(max_length=150, unique=True)
+    mobile = models.CharField(max_length=20, blank=True)
+
+    # User Status
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,14 +57,46 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["user_name"]
+    REQUIRED_FIELDS = ["name"]
 
     class Meta:
         verbose_name = "Accounts"
         verbose_name_plural = "Accounts"
 
-    def __str__(self) -> str:
-        return self.user_name
+    def email_user(self, subject, message):
+        send_mail(
+            subject,
+            message,
+            "l@1.com",
+            [self.email],
+            fail_silently=False,
+        )
 
-    def get_name(self):
-        return self.first_name
+    def __str__(self) -> str:
+        return self.name
+
+
+class Address(models.Model):
+    """
+    Address
+    """
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    customer = models.ForeignKey(Customer, verbose_name=_("Customer"), on_delete=models.CASCADE)
+    full_name = models.CharField(_("Full Name"), max_length=150)
+    phone = models.CharField(_("Phone Number"), max_length=50)
+    postcode = models.CharField(_("Postcode"), max_length=50)
+    address_line = models.CharField(_("Address Line 1"), max_length=255)
+    address_line2 = models.CharField(_("Address Line 2"), max_length=255)
+    town_city = models.CharField(_("Town/City/State"), max_length=150)
+    delivery_instructions = models.CharField(_("Delivery Instructions"), max_length=255)
+    created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("Updated at"), auto_now=True)
+    default = models.BooleanField(_("Default"), default=False)
+
+    class Meta:
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
+
+    def __str__(self):
+        return "Address"

@@ -138,7 +138,7 @@ BASKET_SESSION_ID = "basket"
 
 
 # Custom user model
-AUTH_USER_MODEL = "account.UserBase"
+AUTH_USER_MODEL = "account.Customer"
 LOGIN_REDIRECT_URL = "/account/dashboard"
 LOGIN_URL = "/account/login/"
 
@@ -159,7 +159,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # stripe payment
-STRIPE_ENDPOINT_SECRET = "whsec_4b2f96b50b93aea67dd8b9da55cc38506c89cb68d3d4ad63ba7fa8331e756db1"
-STRIPE_API_KEY = (
-    "sk_test_51KcsBHAy2cl6Tre5PNoJIpbLibaIyo7r6LE97CjobjSnqcfFTEkVFdjlrt6B54VtZ3QpGoDno1Zez7KeRoE6gZrw00lY6sqQyK"
-)
+STRIPE_ENDPOINT_SECRET = config("STRIPE_ENDPOINT_SECRET")
+STRIPE_API_KEY = config("STRIPE_API_KEY")
