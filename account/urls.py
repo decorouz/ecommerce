@@ -28,7 +28,7 @@ urlpatterns = [
     path("profile/delete/", views.delete_user, name="delete_user"),
     path(
         "profile/delete_confirm/",
-        TemplateView.as_view(template_name="account/user/delete_confirm.html"),
+        TemplateView.as_view(template_name="account/dashboard/delete_confirm.html"),
         name="delete_confirmation",
     ),
     # Crud address
