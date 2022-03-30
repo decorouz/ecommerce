@@ -1,5 +1,0 @@
-Authenticate unless set up	4000002500003155
-
-Generic decline	4000000000000002
-
-Visa	4242424242424242
