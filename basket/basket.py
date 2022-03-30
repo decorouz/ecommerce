@@ -1,5 +1,7 @@
 from decimal import Decimal
+from urllib import request
 
+from checkout.models import DeliveryOptions
 from django.conf import settings
 from store.models import Product
 
@@ -56,30 +58,37 @@ class Basket(object):
 
     def get_subtotal_price(self):
         subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
-        print("Correct", subtotal)
         return subtotal
 
     def get_total_price(self):
+        newprice = 0.0
         subtotal = sum([Decimal(item["price"]) * item["qty"] for item in self.basket.values()])
 
-        print(subtotal)
+        if "purchase" in self.session:
+            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
 
-        if subtotal == 0:
-            shipping = Decimal(0.00)
-        else:
-            shipping = Decimal(11.50)
-
-        total = subtotal + Decimal(shipping)
+        total = subtotal + Decimal(newprice)
         return total
 
-    def delete(self, product):
-        """
-        Delete a selected product from session data
-        """
-        product_id = str(product)
-        if product_id in self.basket:
-            del self.basket[product_id]
+    def get_delivery_price(self):
+        newprice = 0.00
 
+        if "purchase" in self.session:
+            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+
+        return newprice
+
+    def basket_update_delivery(self, deliveryprice=0):
+        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        total = subtotal + Decimal(deliveryprice)
+        return total
+
+    def clear(self):
+        """remove cart from session"""
+
+        del self.session[settings.BASKET_SESSION_ID]
+        del self.session["address"]
+        del self.session["purchase"]
         self.save()
 
     def update(self, product, qty):
@@ -91,9 +100,12 @@ class Basket(object):
             self.basket[product_id]["qty"] = qty
         self.save()
 
-    def clear(self):
-        """remove cart from session"""
-
-        del self.session[settings.BASKET_SESSION_ID]
+    def delete(self, product):
+        """
+        Delete a selected product from session data
+        """
+        product_id = str(product)
+        if product_id in self.basket:
+            del self.basket[product_id]
 
         self.save()

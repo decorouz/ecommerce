@@ -56,7 +56,8 @@ Basket Summary
         <div class="">Sub Total: <span class="fw-bold">£</span>
           <div id="subtotal" class="d-inline-flex fw-bold">{{basket.get_subtotal_price}}</div>
         </div>
-        <div id="">Shipping <span class="small">(Next day delivery)</span>: <span class="fw-bold">£11.50</span>
+        <div id="delivery-price">Shipping <span class="small">(Next day delivery)</span>: <span
+            class="fw-bold">£{{basket.get_delivery_price}}</span>
         </div>
         <div class="pt-2">Total to pay: <span class="fw-bold h5">£</span><span id="total"
             class="fw-bold h5">{{basket.get_total_price}}</span></div>
@@ -65,7 +66,8 @@ Basket Summary
     </div>
     <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
       <div class="d-grid gap-2 ">
-        <a role="button" href="{% url 'payment:basket' %}" class="btn btn-success fw-bold" type="button">Checkout</a>
+        <a role="button" href="{% url 'checkout:deliverychoices' %}" class="btn btn-success fw-bold"
+          type="button">Checkout Securely</a>
         <button class="btn btn-light" type="button">Save for later</button>
       </div>
     </div>
@@ -139,9 +141,10 @@ Basket Summary
           }
 
 
-          document.getElementById("basket_qty").innerHTML = json.qty
+          document.getElementById("basket-qty").innerHTML = json.qty
           document.getElementById("subtotal").innerHTML = json.subtotal
           document.getElementById("total").innerHTML = total
+          window.location.reload();
         },
         error: function (xhr, errmsg, err) {
           console.log(err)
@@ -165,10 +168,9 @@ Basket Summary
         action: 'post'
       },
       success: function (json) {
-        total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
-        document.getElementById("basket_qty").innerHTML = json.qty
+        document.getElementById("basket-qty").innerHTML = json.qty
         document.getElementById("subtotal").innerHTML = json.subtotal
-        document.getElementById("total").innerHTML = total
+        document.getElementById("total").innerHTML = json.total_price
       },
       error: function (xhr, errmsg, err) {}
     });

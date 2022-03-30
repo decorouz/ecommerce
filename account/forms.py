@@ -1,12 +1,9 @@
-from dataclasses import field
-
 from django import forms
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordResetForm,
     SetPasswordForm,
 )
-from django_countries.widgets import CountrySelectWidget
 
 from .models import Address, Customer
 
