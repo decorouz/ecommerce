@@ -1,0 +1,272 @@
+[{
+        "model": "inventory.productinventory",
+        "id": "1",
+        "fields": {
+            "sku": "7633969397",
+            "upc": "934093051374",
+            "product_type": "1",
+            "product": "1",
+            "brand": "1",
+            "is_active": "1",
+            "retail_price": "97",
+            "store_price": "92",
+            "sale_price": "46",
+            "weight": "987",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "2",
+        "fields": {
+            "sku": "6327000212",
+            "upc": "812307440164",
+            "product_type": "1",
+            "product": "2",
+            "brand": "3",
+            "is_active": "1",
+            "retail_price": "99",
+            "store_price": "94",
+            "sale_price": "47",
+            "weight": "947",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "3",
+        "fields": {
+            "sku": "7763166969",
+            "upc": "415942974882",
+            "product_type": "1",
+            "product": "3",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "88",
+            "store_price": "84",
+            "sale_price": "42",
+            "weight": "994",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "4",
+        "fields": {
+            "sku": "1409736829",
+            "upc": "897643092610",
+            "product_type": "1",
+            "product": "4",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "73",
+            "store_price": "68",
+            "sale_price": "34",
+            "weight": "1125",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "5",
+        "fields": {
+            "sku": "5475550705",
+            "upc": "110719510358",
+            "product_type": "1",
+            "product": "5",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "75",
+            "store_price": "70",
+            "sale_price": "35",
+            "weight": "1026",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "6",
+        "fields": {
+            "sku": "9836240368",
+            "upc": "311107477050",
+            "product_type": "1",
+            "product": "6",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "70",
+            "store_price": "66",
+            "sale_price": "33",
+            "weight": "1142",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "7",
+        "fields": {
+            "sku": "3745869786",
+            "upc": "483453472324",
+            "product_type": "1",
+            "product": "7",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "75",
+            "store_price": "70",
+            "sale_price": "35",
+            "weight": "954",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "8",
+        "fields": {
+            "sku": "7348030971",
+            "upc": "930368566320",
+            "product_type": "1",
+            "product": "8",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "72",
+            "store_price": "68",
+            "sale_price": "34",
+            "weight": "1134",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "9",
+        "fields": {
+            "sku": "9419284079",
+            "upc": "283467234559",
+            "product_type": "1",
+            "product": "9",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "81",
+            "store_price": "76",
+            "sale_price": "38",
+            "weight": "915",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "10",
+        "fields": {
+            "sku": "1254249244",
+            "upc": "818829729286",
+            "product_type": "1",
+            "product": "10",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "98",
+            "store_price": "94",
+            "sale_price": "47",
+            "weight": "985",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "11",
+        "fields": {
+            "sku": "2642955408",
+            "upc": "798133457621",
+            "product_type": "1",
+            "product": "11",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "97",
+            "store_price": "92",
+            "sale_price": "46",
+            "weight": "1005",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "12",
+        "fields": {
+            "sku": "5625485785",
+            "upc": "835316017196",
+            "product_type": "1",
+            "product": "12",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "84",
+            "store_price": "80",
+            "sale_price": "40",
+            "weight": "1149",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "13",
+        "fields": {
+            "sku": "7100806084",
+            "upc": "513357603089",
+            "product_type": "1",
+            "product": "13",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "91",
+            "store_price": "86",
+            "sale_price": "43",
+            "weight": "1097",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "14",
+        "fields": {
+            "sku": "4124347238",
+            "upc": "166420247581",
+            "product_type": "1",
+            "product": "14",
+            "brand": "4",
+            "is_active": "1",
+            "retail_price": "72",
+            "store_price": "68",
+            "sale_price": "34",
+            "weight": "1027",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+    },
+    {
+        "model": "inventory.productinventory",
+        "id": "15",
+        "fields": {
+            "sku": "4800859111",
+            "upc": "156239973767",
+            "product_type": "1",
+            "product": "15",
+            "brand": "5",
+            "is_active": "1",
+            "retail_price": "79",
+            "store_price": "74",
+            "sale_price": "37",
+            "weight": "957",
+            "created_at": "2021-09-04 22:14:18.279095",
+            "updated_at": "2021-09-04 22:14:18.279095"
+        }
+      }
+
+]
