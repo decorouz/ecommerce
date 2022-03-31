@@ -67,8 +67,67 @@ class ProductInventoryFactory(factory.django.DjangoModelFactory):
     weight = 987
 
 
+class MediaFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Media
+
+    product_inventory = factory.SubFactory(ProductInventoryFactory)
+    image = "images/default.png"
+    alt_text = "a default image solid color"
+    is_feature = True
+
+
+class StockFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Stock
+
+    product_inventory = factory.SubFactory(ProductInventoryFactory)
+    units = 2
+    units_sold = 100
+
+
+class ProductAttributeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductAttribute
+
+    name = factory.Sequence(lambda n: "attribute_name_%d" % n)
+    description = factory.Sequence(lambda n: "description_%d" % n)
+
+
+class ProductAttributeValueFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductAttributeValue
+
+    product_attribute = factory.SubFactory(ProductAttributeFactory)
+    attribute_value = fake.lexify(text="attribute_value_??????")
+
+
+class ProductAttributeValuesFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.ProductAttributeValues
+
+    attributevalues = factory.SubFactory(ProductAttributeValueFactory)
+    productinventory = factory.SubFactory(ProductInventoryFactory)
+
+
+class ProductWithAttributeValuesFactory(ProductInventoryFactory):
+    attributevalues1 = factory.RelatedFactory(
+        ProductAttributeValuesFactory,
+        factory_related_name="productinventory",
+    )
+    attributevalues2 = factory.RelatedFactory(
+        ProductAttributeValuesFactory,
+        factory_related_name="productinventory",
+    )
+
+
 register(CategoryFactory)
 register(ProductFactory)
 register(ProductTypeFactory)
 register(BrandFactory)
 register(ProductInventoryFactory)
+register(MediaFactory)
+register(StockFactory)
+register(ProductAttributeFactory)
+register(ProductAttributeValueFactory)
+register(ProductWithAttributeValuesFactory)
